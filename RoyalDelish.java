@@ -12,6 +12,7 @@ public class RoyalDelish {
         antrean.tambahAntrian("Ainra", "08224500000");
         antrean.tambahAntrian("Danra", "08224511111");
         antrean.tambahAntrian("Sanri", "08224522222");
+        antrean.tambahAntrian("Rakha", "08278022222"); //Menambahkan data pembeli ke-4 untuk demo laporan pesanan
         System.out.println(); // spasi setelah pre-load
  
         int pilihan;
