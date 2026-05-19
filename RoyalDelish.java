@@ -36,30 +36,45 @@ public class RoyalDelish {
                     antrean.cetakAntrian();
                     break;
  
+                // MODIFIKASI: Gabungkan proses hapus antrean dan input pesanan dalam satu menu
                 case 3: // ---- Hapus Antrian & Input Pesanan ----
-                    if (antrean.isEmpty()) {
-                        System.out.println("Antrean kosong, tidak ada yang bisa dilayani.");
-                        break;
-                    }
-                    antrean.cetakAntrian();
-                    System.out.print("\nMasukkan No. Antrian yang dipanggil : ");
-                    int noA = sc.nextInt();
-                    sc.nextLine();
- 
-                    Pembeli dilayani = antrean.hapusAntrian(noA);
-                    if (dilayani != null) {
-                        // Input pesanan pembeli yang baru saja dipanggil
+                if (antrean.isEmpty()) {
+                    System.out.println("Antrean kosong, tidak ada yang bisa dilayani.");
+                    break;
+                }
+                antrean.cetakAntrian();
+                System.out.print("\nMasukkan No. Antrian yang dipanggil : ");
+                int noA = sc.nextInt();
+                sc.nextLine();
+
+                Pembeli dilayani = antrean.hapusAntrian(noA);
+                if (dilayani != null) {
+                    String lanjut;
+                    int    jumlahPesanan = 0;
+
+                    do {
+                        // Input satu item pesanan
                         System.out.print("Kode Pesanan  : ");
                         int kode = sc.nextInt(); sc.nextLine();
                         System.out.print("Nama Pesanan  : ");
                         String namaMakanan = sc.nextLine();
                         System.out.print("Harga         : ");
                         int harga = sc.nextInt(); sc.nextLine();
- 
+
                         pesanan.tambahPesanan(kode, namaMakanan, harga, dilayani.namaPembeli);
-                        System.out.println(dilayani.namaPembeli + " telah memesan " + namaMakanan);
-                    }
-                    break;
+                        jumlahPesanan++;
+                        System.out.println("Pesanan \"" + namaMakanan + "\" berhasil ditambahkan.");
+
+                        // Tanya apakah ingin menambah item lagi
+                        System.out.print("Tambah pesanan lagi? (y/n) : ");
+                        lanjut = sc.nextLine().trim().toLowerCase();
+
+                    } while (lanjut.equals("y"));
+
+                    System.out.println(dilayani.namaPembeli + " telah memesan "
+                            + jumlahPesanan + " item.");
+                }
+                break;
  
                 case 4: // ---- Laporan Pesanan ----
                     pesanan.laporan();
