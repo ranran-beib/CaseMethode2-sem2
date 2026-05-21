@@ -14,15 +14,9 @@ class AntreanDLL {
      * Nomor antrean di-increment otomatis setiap kali dipanggil.
      */
     void tambahAntrian(String nama, String noHp) {
+    counter++;
 
-    // nomor antrean selalu di akhir
-    int nomorBaru = 1;
-
-    if (tail != null) {
-        nomorBaru = tail.noAntrian + 1;
-    }
-
-    Pembeli baru = new Pembeli(nomorBaru, nama, noHp);
+    Pembeli baru = new Pembeli(counter, nama, noHp);
 
     if (head == null) {
         head = baru;
@@ -33,7 +27,7 @@ class AntreanDLL {
         tail = baru;
     }
 
-    System.out.println("Antrian berhasil ditambahkan dengan nomor: " + nomorBaru);
+    System.out.println("Antrian berhasil ditambahkan dengan nomor: " + counter);
     }
  
     /**
@@ -90,18 +84,6 @@ class AntreanDLL {
                 // Putus pointer node yang dihapus agar GC bisa bekerja
                 curr.prev = null;
                 curr.next = null;
-
-                // Geser nomor antrean setelah data dihapus
-                Pembeli geser = head;
-
-                int nomor = 1;
-
-                while (geser != null) {
-                    geser.noAntrian = nomor;
-                    nomor++;
-                    geser = geser.next;
-                }
-
                 return curr; // kembalikan data pembeli yang dihapus
             }
             curr = curr.next;
